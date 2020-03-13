@@ -23,10 +23,11 @@ class AgendasController < ApplicationController
   end
 
   def destroy
-    binding.pry
+    # binding.pry
     if current_user.id == @agenda.user_id || @working_team.owner_id
       @agenda.destroy
-      redirect_to dashboard_url, notice: I18n.t('views.messages.create_agenda')
+      DestroyAgendaMailer.destroy_agenda_mail(@agenda).deliver
+      redirect_to dashboard_url, notice: I18n.t('views.messages.delete_agenda')
     end
   end
 
