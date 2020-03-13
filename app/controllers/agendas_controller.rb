@@ -1,5 +1,6 @@
 class AgendasController < ApplicationController
   # before_action :set_agenda, only: %i[show edit update destroy]
+  before_action :set_agenda, only:[:destroy]
 
   def index
     @agendas = Agenda.all
@@ -22,9 +23,12 @@ class AgendasController < ApplicationController
   end
 
   def destroy
-    @agenda.destroy
-    redirect_to dashboard_url, notice: I18n.t('views.messages.create_agenda')
-  end  
+    binding.pry
+    if current_user.id == @agenda.user_id || @working_team.owner_id
+      @agenda.destroy
+      redirect_to dashboard_url, notice: I18n.t('views.messages.create_agenda')
+    end
+  end
 
   private
 
