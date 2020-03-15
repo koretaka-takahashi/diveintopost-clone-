@@ -261,6 +261,7 @@ en:
       edit_profile: 'Edit Profile'
       team_you_belong_to: 'The team you belong to'
       posted_articles: 'List of posted articles'
+      delete_agenda: 'The agenda has been deleted'
     button:
       submit: 'Submit'
       edit: 'Edit'
