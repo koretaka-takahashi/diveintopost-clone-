@@ -254,6 +254,7 @@ ja:
       delete_agenda: 'アジェンダが削除されました。'
       move_authority: '権限移動'
       nominated_to_owner: 'チームリーダーに指名されました。'
+      no_authority_without_owner: 'チームリーダー以外には権限がありません。'
     button:
       submit: '投稿'
       edit: '編集'
