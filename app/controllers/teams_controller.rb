@@ -50,6 +50,8 @@ class TeamsController < ApplicationController
   def change_owner
     @working_team.owner_id = params[:id]
     @working_team.save
+    new_owner = @working_team.owner
+    NominatedToOwnerMailer.nominated_to_owner_mail(new_owner).deliver
   end
 
   private
