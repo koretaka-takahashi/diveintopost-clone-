@@ -47,6 +47,11 @@ class TeamsController < ApplicationController
     @team = current_user.keep_team_id ? Team.find(current_user.keep_team_id) : current_user.teams.first
   end
 
+  def change_owner
+    @working_team.owner_id = params[:id]
+    @working_team.save
+  end
+
   private
 
   def set_team
