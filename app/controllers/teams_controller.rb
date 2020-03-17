@@ -52,6 +52,7 @@ class TeamsController < ApplicationController
     @working_team.save
     new_owner = @working_team.owner
     NominatedToOwnerMailer.nominated_to_owner_mail(new_owner).deliver
+    redirect_back(fallback_location: team_path(@working_team))
   end
 
   private
