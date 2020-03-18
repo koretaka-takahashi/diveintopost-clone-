@@ -72,12 +72,8 @@ class TeamsController < ApplicationController
   end
 
   def exclude_without_owner
-    binding.pry
-
-    if current_user == @team.owner
-      I18n.t('views.messages.no_authority_without_owner')
-      redirect_to teams_url
-
+    if current_user != @team.owner
+      redirect_back(fallback_location: team_path(@working_team), notice: I18n.t('views.messages.no_authority_without_owner'))
     end  
   end  
 end
