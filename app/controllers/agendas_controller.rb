@@ -23,7 +23,6 @@ class AgendasController < ApplicationController
   end
 
   def destroy
-    # binding.pry
     if current_user.id == @agenda.user_id || @working_team.owner_id
       @agenda.destroy
       DestroyAgendaMailer.destroy_agenda_mail(@agenda).deliver

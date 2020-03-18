@@ -47,6 +47,18 @@ class TeamsController < ApplicationController
     @team = current_user.keep_team_id ? Team.find(current_user.keep_team_id) : current_user.teams.first
   end
 
+  def change_owner
+    if current_user == @working_team.owner
+      @working_team.owner_id = params[:id]
+      @working_team.save
+      new_owner = @working_team.owner
+      NominatedToOwnerMailer.nominated_to_owner_mail(new_owner).deliver
+      redirect_back(fallback_location: team_path(@working_team))
+    else
+      I18n.t('views.messages.no_authority_without_owner')
+    end
+  end
+
   private
 
   def set_team
