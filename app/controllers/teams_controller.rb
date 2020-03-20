@@ -50,7 +50,7 @@ class TeamsController < ApplicationController
   end
 
   def change_owner
-    if current_user == @working_team.owner
+    if current_user.id == @working_team.owner_id
       @working_team.owner_id = params[:id]
       @working_team.save
       new_owner = @working_team.owner
@@ -72,7 +72,7 @@ class TeamsController < ApplicationController
   end
 
   def exclude_without_owner
-    if current_user != @team.owner
+    if current_user.id != @team.owner_id
       redirect_back(fallback_location: team_path(@working_team), notice: I18n.t('views.messages.no_authority_without_owner'))
     end  
   end  
